@@ -7,7 +7,7 @@ class Game
   end
 
   def add(player)
-    player1 ? player2 = player : player1 = player unless has_two_players?
+    @player1 ? @player2 = player : @player1 = player unless has_two_players?
   end
 
   def has_two_players?
