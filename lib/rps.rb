@@ -10,33 +10,31 @@ class RockPapepScissors < Sinatra::Base
 
   set :views, Proc.new { File.join(root, '..', 'views') }
 
+  set :public_folder, 'public'
+
   enable :sessions
 
   get '/' do
-    # @player1 = GAME.player1
-    # @player2 = GAME.player2
-    # # p '===' * 30
-    # # p session
-    # # p '===' * 30
-    # # p GAME
     erb :index
   end
 
   post '/' do
     player = Player.new(params[:name])
-    # session[:game] = GAME
     if GAME.player1.nil?
       GAME.add(player)
       PLAYERS << session["session_id"]
+      return erb :wait
     elsif GAME.player2.nil? && PLAYERS.first != session["session_id"]
       GAME.add(player)
       PLAYERS = session["session_id"]
+      return erb :game
     end
-    p '===' * 30
-    p session
-    p'===' * 30
-    p GAME
-    erb :wait
+    return erb :game if GAME.has_two_players?
+  end
+
+  post '/winner' do
+    p params
+    erb :winner
   end
 
   # start the server if ruby file executed directly
