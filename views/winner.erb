@@ -1,3 +1,24 @@
+<% if @decision == DRAW %>
+  <h1> DRAW </h1>
+<% elsif @decision = WEAPON1 %>
+  <% if PLAYERS[0] == session["session_id"] %>
+    <h1>You Won!</h1>
+  <% else %> 
+    <h1>You loose!</h1>
+  <% end %>
+<% else %>
+  <% if PLAYERS[0] == session["session_id"] %>
+    <h1>You loose!</h1>
+  <% else %> 
+    <h1>You Won!</h1>
+  <% end %>
+<% end %>
+
+
+
+
+<!-- 
+
 <% if WEAPON1 && WEAPON2 %>  
   <% if WEAPON1 == WEAPON2 %>
     <h1>DRAW</h1>
@@ -45,3 +66,4 @@
     <% end %>
    <% end %>
  <% end %>
+ -->

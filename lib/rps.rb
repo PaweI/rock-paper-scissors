@@ -1,12 +1,15 @@
 require 'sinatra/base'
 require_relative 'game'
 require_relative 'player'
+require_relative 'rock-paper-scissors'
 
 class RockPapepScissors < Sinatra::Base
 
   GAME = Game.new
 
   PLAYERS = []
+
+  ENGINE = RockPaperScissors.new
 
   WEAPON1 = nil
 
@@ -39,6 +42,9 @@ class RockPapepScissors < Sinatra::Base
   post '/winner' do
     WEAPON1=params[:weapon] if PLAYERS[0] == session["session_id"]
     WEAPON2=params[:weapon] if PLAYERS[1] == session["session_id"]
+    if WEAPON1 && WEAPON2
+      @decision = ENGINE.winner(WEAPON1, WEAPON2)
+    end
     erb :winner
   end
 
