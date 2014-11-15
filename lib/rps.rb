@@ -8,6 +8,10 @@ class RockPapepScissors < Sinatra::Base
 
   PLAYERS = []
 
+  WEAPON1 = nil
+
+  WEAPON2 = nil
+
   set :views, Proc.new { File.join(root, '..', 'views') }
 
   set :public_folder, 'public'
@@ -26,14 +30,15 @@ class RockPapepScissors < Sinatra::Base
       return erb :wait
     elsif GAME.player2.nil? && PLAYERS.first != session["session_id"]
       GAME.add(player)
-      PLAYERS = session["session_id"]
+      PLAYERS << session["session_id"]
       return erb :game
     end
     return erb :game if GAME.has_two_players?
   end
 
   post '/winner' do
-    p params
+    WEAPON1=params[:weapon] if PLAYERS[0] == session["session_id"]
+    WEAPON2=params[:weapon] if PLAYERS[1] == session["session_id"]
     erb :winner
   end
 
