@@ -1,6 +1,6 @@
-<% if @decision == DRAW %>
+<% if DECISION == "draw" %>
   <h1> DRAW </h1>
-<% elsif @decision = WEAPON1 %>
+<% elsif DECISION == WEAPON1 %>
   <% if PLAYERS[0] == session["session_id"] %>
     <h1>You Won!</h1>
   <% else %> 
@@ -15,55 +15,3 @@
 <% end %>
 
 
-
-
-<!-- 
-
-<% if WEAPON1 && WEAPON2 %>  
-  <% if WEAPON1 == WEAPON2 %>
-    <h1>DRAW</h1>
-  <% elsif WEAPON1 == "paper" %>
-    <% if WEAPON2 == "scissors" %>
-      <% if PLAYERS[0] == session["session_id"] %>
-        <h1>You loose</h1>
-      <% else %>
-        <h1>You Win!</h1>
-      <% end %>
-    <% elsif WEAPON2 == "rock" %>
-      <% if PLAYERS[0] == session["session_id"] %>
-        <h1>You Win!</h1>
-      <% else %>
-        <h1>You loose</h1>
-      <% end %>
-    <% end %>
-  <% elsif WEAPON1 == "rock" %>
-    <% if WEAPON2 == "paper" %>
-      <% if PLAYERS[0] == session["session_id"] %>
-        <h1>You loose</h1>
-      <% else %>
-        <h1>You Win!</h1>
-      <% end %>
-    <% elsif WEAPON2 == "scissors" %>
-      <% if PLAYERS[0] == session["session_id"] %>
-        <h1>You Win!</h1>
-      <% else %>
-        <h1>You loose</h1>
-      <% end %>
-    <% end %>
-  <% elsif WEAPON1 == "scisors" %>
-    <% if WEAPON2 == "rock" %>
-      <% if PLAYERS[0] == session["session_id"] %>
-        <h1>You loose</h1>
-      <% else %>
-        <h1>You Win!</h1>
-      <% end %>
-    <% elsif WEAPON2 == "paper" %>
-      <% if PLAYERS[0] == session["session_id"] %>
-        <h1>You Win!</h1>
-      <% else %>
-        <h1>You loose</h1>
-      <% end %>
-    <% end %>
-   <% end %>
- <% end %>
- -->

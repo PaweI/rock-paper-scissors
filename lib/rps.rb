@@ -15,6 +15,8 @@ class RockPapepScissors < Sinatra::Base
 
   WEAPON2 = nil
 
+  DECISION = nil
+
   set :views, Proc.new { File.join(root, '..', 'views') }
 
   set :public_folder, 'public'
@@ -39,14 +41,19 @@ class RockPapepScissors < Sinatra::Base
     return erb :game if GAME.has_two_players?
   end
 
-  post '/winner' do
+  post '/decision' do
     WEAPON1=params[:weapon] if PLAYERS[0] == session["session_id"]
     WEAPON2=params[:weapon] if PLAYERS[1] == session["session_id"]
     if WEAPON1 && WEAPON2
-      @decision = ENGINE.winner(WEAPON1, WEAPON2)
+      redirect '/winner'
     end
+  end
+
+  get '/winner' do
+    DECISION = ENGINE.winner(WEAPON1, WEAPON2)
     erb :winner
   end
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0
