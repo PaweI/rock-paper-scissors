@@ -1,5 +1,4 @@
 class Game
-
   attr_reader :player1, :player2
 
   def initialize
@@ -11,7 +10,6 @@ class Game
   end
 
   def has_two_players?
-    return !@player1.nil? && !@player2.nil?
+    !@player1.nil? && !@player2.nil?
   end
-
 end
